@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="wwwDealOption">
+    <insert id="insert" parameterType="com.ssj.www.deal.model.DealOption">
+    <![CDATA[     
+		INSERT INTO deal_option (
+			main_deal_srl
+			,amount
+        	,`status`
+        	,max_count
+        	,depth1
+        	,depth2
+        	,depth3
+        	,who_update
+        	,create_at
+        	,updated_at
+		) VALUES (
+			#{mainDealSrl}
+			,#{amount}
+			,#{status}
+			,#{maxCount}
+			,#{depth1}
+			,#{depth2}
+			,#{depth3}
+			,#{whoUpdate}
+			,#{createAt}
+			,#{updatedAt}
+		)
+	]]>		
+    </insert>  
+                           
+    <select id="selectList" parameterType= "int" resultType="com.ssj.www.deal.model.DealOption">
+    <![CDATA[     
+		SELECT
+			main_deal_srl
+			,deal_option_srl
+			,amount
+        	,`status`
+        	,max_count
+        	,depth1
+        	,depth2
+        	,depth3
+        	,who_update
+        	,create_at
+        	,updated_at
+		FROM
+			deal_option
+        WHERE 
+		    main_deal_srl = #{mainDealSrl}
+	]]>		
+    </select>
+    
+    <update id="update" parameterType="com.ssj.www.deal.model.DealOption">
+    <![CDATA[     
+		UPDATE deal_option SET 
+			amount  = #{amount}
+        	,`status` = #{status}
+        	,max_count = #{maxCount}
+        	,depth1 = #{depth1}
+        	,depth2 = #{depth2}
+        	,depth3 = #{depth3}
+        	,who_update = #{whoUpdate}
+        	,updated_at = NOW()
+        WHERE 
+		    deal_option_srl = #{dealOptionSrl}
+	]]>		
+    </update>  
+</mapper>

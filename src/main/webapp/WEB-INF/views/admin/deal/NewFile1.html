@@ -1,0 +1,30 @@
+<html><head><title>Dynamic Page</title>
+<script type="text/javascript">
+$("#scPrcTp1 > option[value=02]").attr("selected", "ture");
+var prcTp1 = $("#scPrcTp1 option:selected").val();
+</script>
+</head> 
+
+<body> 
+...
+
+ <td WIDTH="20%" class="tb_brw_tt">처리유형</td>
+
+ <td WIDTH="30%" class="tb_w_tt" colspan="3">
+
+  <select id="scPrcTp1" name="sc.prcTp1" class="txtbox">
+   <option value="00" selected>미처리</option>
+   <option value="02" >해당사항없음</option>
+   <option value="03" >판매중지</option>
+  </select>
+
+ </td> 
+
+	<select  id = "dealOptions">
+		<option value = "test1" id = "1">test1</option>
+		<option value = "test2" id = "2">test2</option>
+		<option value = "test3" id = "3">test3</option>
+	</select>
+
+</body>
+</html>

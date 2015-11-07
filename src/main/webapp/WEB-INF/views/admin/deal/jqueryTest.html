@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+ 	<script type="text/javascript">
+		$('#navigation li').live('click', function() {
+			$('#navigation li').removeClass('selected');
+			$(this).addClass('selected');
+		})
+
+	$(document).ready(function(){
+		$("#optionAdd").click(function(){
+			var option = $(".option");
+			var content = $(".content").clone();
+			content.attr("class", "");
+			option.append(content);
+		});
+		
+		$(".remove").live("click", function(){ // $("table.dynatable button.remove").live("click", function() {
+			$(this).parents("tr").remove();
+		});
+	});
+		
+	</script>
+            <style type="text/css">
+            #navigation li {
+                list-style:none;
+                float:left;
+                padding:5px;
+            }
+            #navigation {
+                cursor:pointer;
+            }
+            #navigation .selected {
+                background-color:red;
+                color:white;
+            }
+        </style>    
+</head>
+
+
+<body>
+	<ul id="navigation">
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>javascript</li>
+            <li class="selected">jQuery</li>
+            <li>PHP</li>
+            <li>mysql</li>
+	</ul>
+	
+	<table class = "option">
+		<thead>
+			<tr class = "title">
+				<th width = 50>id</th>
+				<th width = 50>옵션번호</th>
+				<th width = 50>상태</th>
+				<th width = 50>옵션가격</th>
+				<th width = 50>판매수량</th>
+				<th width = 50>옵션명</th>
+				<th width = 50>옵션명</th>
+				<th width = 50>옵션명</th>
+				<th width = 50>버튼</th>
+				<th><button id="optionAdd">Add</button></th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr class = "content">
+				<td><input type = "text" class="id" name = "id" value = "0"/></td>
+				<td><input type = "number" name = "category1" value = "1"/></td>
+				<td><input type = "text" name = "status" value = "WT" /></td>
+				<td><input type = "text" name = "status" value = "WT" /></td>
+				<td><input type = "number" name = "maxCount" value ="10"/></td>
+				<td><input type = "number" name = "category1" value = "1"/></td>
+				<td><input type = "number" name = "category2" value = "2"/></td>
+				<td><input type = "number" name = "category3" value = "3"/></td>
+				<td><button class ="remove">Remove</button>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

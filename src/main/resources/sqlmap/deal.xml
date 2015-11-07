@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="deal">
+   	<insert id="insert" parameterType="com.ssj.admin.deal.model.Deal">
+    <![CDATA[     
+		INSERT INTO deal (
+		   	title
+        	,start_date
+        	,end_date
+        	,created_at
+        	,updated_at
+        	,deal_status
+        	,category1
+        	,category2
+        	,category3
+        	,category4
+        	,who_update
+        	,delivery_policy
+        	,delivery_amount
+        	,delivery_if_amount
+		) VALUES (
+		    #{title}
+			,#{startDate}
+			,#{endDate}
+			,#{createdAt}
+			,#{updatedAt}
+			,#{dealStatus}
+			,#{category1}
+			,#{category2}
+			,#{category3}
+			,#{category4}
+			,#{whoUpdate}
+			,#{deliveryPolicy}
+			,#{deliveryAmount}
+			,#{deliveryIfAmount}
+		)
+	]]>		
+    </insert>                
+    
+    <select id="selectOne" parameterType="int" resultType="com.ssj.admin.deal.model.Deal">
+    <![CDATA[     
+		SELECT
+		  `main_deal_srl` 
+		  ,`title` 
+		  ,`start_date` 
+		  ,`end_date` 
+		  ,`created_at`
+		  ,`updated_at`
+		  ,`deal_status` 
+		  ,`category1`
+		  ,`category2`
+		  ,`category3`
+		  ,`category4`
+		  ,`who_update`
+		  ,`delivery_policy`
+		  ,`delivery_amount`
+		  ,`delivery_if_amount`
+		FROM
+			deal
+		WHERE
+			`main_deal_srl` = #{mainDealSrt}
+	]]>		
+    </select> 
+    
+	<select id="selectList" resultType="com.ssj.admin.deal.model.Deal">
+    <![CDATA[     
+		SELECT
+		  `main_deal_srl` 
+		  ,`title` 
+		  ,`start_date` 
+		  ,`end_date` 
+		  ,`created_at`
+		  ,`updated_at`
+		  ,`deal_status` 
+		  ,`category1`
+		  ,`category2`
+		  ,`category3`
+		  ,`category4`
+		  ,`who_update`
+		  ,`delivery_policy`
+		  ,`delivery_amount`
+		  ,`delivery_if_amount`
+		FROM
+			deal
+	]]>		
+    </select>
+  	
+  	<update id="update" parameterType="com.ssj.admin.deal.model.Deal">
+    <![CDATA[     
+		UPDATE deal SET 
+		   	title = #{title}
+        	,start_date = #{startDate}
+        	,end_date = #{endDate}
+        	,updated_at = #{updatedAt}
+        	,deal_status = #{dealStatus}
+        	,category1 = #{category1}
+        	,category2 = #{category2}
+        	,category3 = #{category3}
+        	,category4 = #{category4}
+        	,who_update = #{whoUpdate}
+        	,delivery_policy = #{deliveryPolicy}
+        	,delivery_amount = #{deliveryAmount}
+        	,delivery_if_amount = #{deliveryIfAmount}
+        WHERE 
+		    main_deal_srl = #{mainDealSrl}
+	]]>		
+    </update>  
+</mapper>

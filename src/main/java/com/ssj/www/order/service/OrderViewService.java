@@ -40,32 +40,33 @@ public class OrderViewService {
 	}
 	
 	
-	
-	public Deal dealSelect(int mainDealSrl) {
+//	
+//	public Deal dealSelect(int mainDealSrl) {
+////		Deal deal = wwwDealRepository.dealSelect(mainDealSrl);
 //		Deal deal = wwwDealRepository.dealSelect(mainDealSrl);
-		Deal deal = wwwDealRepository.dealSelect(mainDealSrl);
-		List<DealOption> dealOptionList = wwwDealOptionRepository.dealOptionSelect(mainDealSrl);
-		deal.setDealOptions(dealOptionList);
-		System.out.println("=======================OrderViewService wwwDealSelect : " + deal.getDealOptions());
-		System.out.println("=======================OrderViewService getDealOptions size: " + deal.getDealOptions().size());
-		
-		return deal;
-	}
-	
-	
-	
-	public List<DealOption> dealOptionSelect(int mainDealSrl) {
-		List<DealOption> dealOptionList = wwwDealOptionRepository.dealOptionSelect(mainDealSrl);
-		System.out.println("========서비스 dealOptionList size ======" + dealOptionList.size() + "============================");
-		return dealOptionList;
-	}
+//		List<DealOption> dealOptionList = wwwDealOptionRepository.dealOptionSelect(mainDealSrl);
+//		deal.setDealOptions(dealOptionList);
+//		System.out.println("=======================OrderViewService wwwDealSelect : " + deal.getDealOptions());
+//		System.out.println("=======================OrderViewService getDealOptions size: " + deal.getDealOptions().size());
+//		
+//		return deal;
+//	}
+//	
+//	
+//	
+//	public List<DealOption> dealOptionSelect(int mainDealSrl) {
+//		List<DealOption> dealOptionList = wwwDealOptionRepository.dealOptionSelect(mainDealSrl);
+//		System.out.println("========서비스 dealOptionList size ======" + dealOptionList.size() + "============================");
+//		return dealOptionList;
+//	}
 
 	
 
-	public List<OrderView> orderViewSelectList(OrderViewList orderViewList) {
-		List<OrderView> orderViews = orderViewRepository.orderViewSelectList(orderViewList);
-		System.out.println("========서비스 dealOptionList size ======" + orderViews.size() + "============================");
-		return orderViews;
+	public List<OrderView> orderViewSelectList(OrderViewList orderViews) {
+		System.out.println("========orderView서비스 접근");
+		List<OrderView> orderViewList = orderViewRepository.orderViewSelectList(orderViews);
+		System.out.println("========orderView서비스 dealOptionList size ======" + orderViewList + "============================");
+		return orderViewList;
 	}
 
 }

@@ -10,12 +10,10 @@ import org.springframework.stereotype.Repository;
 
 import com.ssj.admin.deal.model.Deal;
 import com.ssj.admin.deal.model.DealOption;
-import com.ssj.springstudy.sample.repository.SampleRepository;
 
 @Repository
 public class DealOptionRepository {
 	@SuppressWarnings("unused")
-	private static final Logger logger = LoggerFactory.getLogger(SampleRepository.class);
 		
 	@Autowired
 	private SqlSessionTemplate sqlSession;

@@ -24,7 +24,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.ssj.admin.deal.model.DealOption;
 import com.ssj.admin.deal.service.DealService;
-import com.ssj.springstudy.sample.controller.SampleController;
 
 public class DealOptionControllerTest {
 	@Autowired

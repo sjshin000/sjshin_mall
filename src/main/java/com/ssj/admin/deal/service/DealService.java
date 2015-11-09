@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.ssj.admin.deal.model.Deal;
 import com.ssj.admin.deal.repository.DealRepository;
-import com.ssj.springstudy.sample.repository.SampleRepository;
-import com.ssj.springstudy.sample.service.SampleService;
 
 @Service
 public class DealService {

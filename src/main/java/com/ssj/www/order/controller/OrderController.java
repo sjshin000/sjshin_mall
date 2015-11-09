@@ -33,26 +33,28 @@ public class OrderController {
 		System.out.println("=========paramOrder " + orderViewList);
 		System.out.println("=========orders " + orderViewList.getOrderViewList().size());
 		
-		Deal deal = null;
-		List<DealOption> dealOptionList = null;
-		for (OrderView orderView : orderViewList.getOrderViewList()) {
-			//deal 조회해 오기
-			deal = orderViewService.dealSelect(orderView.getMainDealSrl());
-
-			//option정보 조회해 오기
-			dealOptionList = orderViewService.dealOptionSelect(orderView.getMainDealSrl());
-			
-			//orderView amount set
-			orderView =  orderViewService.orderWiewAmountSet(orderView);
-			System.out.println("============orderView.getOrderDealOptionAmount() : " + orderView.getOrderDealOptionAmount());
-		}
+		orderViewService.orderViewSelectList(orderViewList);
+		
+//		Deal deal = null;
+//		List<DealOption> dealOptionList = null;
+//		for (OrderView orderView : orderViewList.getOrderViewList()) {
+//			//deal 조회해 오기
+//			deal = orderViewService.dealSelect(orderView.getMainDealSrl());
+//
+//			//option정보 조회해 오기
+//			dealOptionList = orderViewService.dealOptionSelect(orderView.getMainDealSrl());
+//			
+//			//orderView amount set
+//			orderView =  orderViewService.orderWiewAmountSet(orderView);
+//			System.out.println("============orderView.getOrderDealOptionAmount() : " + orderView.getOrderDealOptionAmount());
+//		}
 		
 		mov.addObject("orderViewList", orderViewList.getOrderViewList());
-		mov.addObject("deal", deal);
-		mov.addObject("dealOptionList", dealOptionList);
-		System.out.println("======orderViewList.getOrderViewList() 사이즈 "+ orderViewList.getOrderViewList());
-		System.out.println("======deal "+ deal);
-		System.out.println("======dealOptionList "+ dealOptionList);
+//		mov.addObject("deal", deal);
+//		mov.addObject("dealOptionList", dealOptionList);
+//		System.out.println("======orderViewList.getOrderViewList() 사이즈 "+ orderViewList.getOrderViewList());
+//		System.out.println("======deal "+ deal);
+//		System.out.println("======dealOptionList "+ dealOptionList);
 		return mov;
 	}
 }

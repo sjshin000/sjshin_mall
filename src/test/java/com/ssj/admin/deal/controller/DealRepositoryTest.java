@@ -23,8 +23,6 @@ import com.ssj.admin.deal.model.Deal;
 import com.ssj.admin.deal.model.DealOption;
 import com.ssj.admin.deal.repository.DealOptionRepository;
 import com.ssj.admin.deal.repository.DealRepository;
-import com.ssj.springstudy.sample.model.Sample;
-import com.ssj.springstudy.sample.repository.SampleRepository;
 
 import org.springframework.util.DigestUtils;
 

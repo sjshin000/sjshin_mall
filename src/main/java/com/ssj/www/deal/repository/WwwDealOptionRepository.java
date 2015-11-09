@@ -10,13 +10,13 @@ import org.springframework.stereotype.Repository;
 
 import com.ssj.www.deal.model.Deal;
 import com.ssj.www.deal.model.DealOption;
-import com.ssj.springstudy.sample.repository.SampleRepository;
+
 
 @Repository
 public class WwwDealOptionRepository {
 	@SuppressWarnings("unused")
-	private static final Logger logger = LoggerFactory.getLogger(SampleRepository.class);
 		
+	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	

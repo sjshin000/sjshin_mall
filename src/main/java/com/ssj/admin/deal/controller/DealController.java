@@ -20,7 +20,6 @@ import com.ssj.admin.deal.service.DealService;
 public class DealController {
 	private static final Logger logger = LoggerFactory.getLogger(DealController.class);
 	
-	
 	@Autowired
 	private DealService dealService;
 	

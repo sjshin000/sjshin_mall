@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.ssj.admin.deal.model.Deal;
 import com.ssj.admin.deal.model.DealOption;
-import com.ssj.springstudy.sample.repository.SampleRepository;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class DealRepository {
 	@SuppressWarnings("unused")
-	private static final Logger logger = LoggerFactory.getLogger(SampleRepository.class);
 		
 	@Autowired
 	private SqlSessionTemplate sqlSession;

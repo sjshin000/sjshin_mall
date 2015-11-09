@@ -23,37 +23,38 @@ order 페이지
 
 <br />
 <table class = "content">
+    <colgroup>
+        <col width="31"><col width="109"><col width="561"><col width="130"><col width="99">
+    </colgroup>
 	<tr class = "title">
-		<th width = "20">딜번호</th>
-		<th width = "50">상품 이미지</th>
-		<th width = "50">상품 이름</th>
-		<th width = "50">옵션 이름 123</th>
+		<th scope="col" class="thmb">딜</th>
+		<th scope="col" class="deal_info">상품 이미지</th>
+		<th scope="col" class="deal_info">상품 정보</th>
 		
-		<th width = "20">옵션번호</th>
-		<th width = "20">상품가격</th>
-		<th width = "20">수량</th>
-		<th width = "20">상품당 가격</th>
-		<th width = "20">주문금액</th>
-		<th width = "20">딜 배송비</th>
+		<th scope="col" class="amounts">상품당 가격</th>
+		<th scope="col" class="delivery">딜 배송비</th>
 	</tr>
 	
 	<c:forEach items = "${dealOptionList}" var = "dealOption" varStatus="status" >
 	<c:forEach items = "${orderViewList}" var = "orderView" varStatus="status" >
 		<tr class = "">
 			<c:if test = "${orderView.mainDealSrl == deal.mainDealSrl}">
-				<td>딜번호 : ${deal.mainDealSrl}</td>
+				<td>${deal.mainDealSrl}</td>
 				<td>상품이미지</td>
-				<td>상품 이름 : ${deal.title}</td>
-
+				<td><a href="" target="_blank" title="deal title" tl:area="CCCO" tl:ord="1" tl:linktype="txt">상품 이름 : ${deal.title}</a>
+				
+				<ul name="option_area" class="uio_option_area">
 				<c:if test = "${deal.mainDealSrl == dealOption.mainDealSrl}">	
-					<td>옵션 이름 : ${dealOption.dealOptionSrl}</td>
-					<td>옵션번호 : ${dealOption.dealOptionSrl}</td>
-					<td>상품가격 : ${dealOption.amount}</td>
-					<td>수량 : ${orderView.orderCount}</td>
-					<td>상품당 가격 10000 *${orderView.orderCount}</td>
+					<span class="option">옵션 이름 : ${dealOption.dealOptionSrl}</span>
+					옵션번호 : ${dealOption.dealOptionSrl}
+					<span class="amounts"><em name="opt_amount">상품가격 : ${dealOption.amount}</em></span>
+					수량 : ${orderView.orderCount}
+					상품당 가격 10000 *${orderView.orderCount}
+					
 					<td>주문금액</td>
 					<td>딜 배송비 : ${deal.deliveryAmount}</td>
 				</c:if>
+				</ul>
 			</c:if>
 		</tr>
 		orderDealOptionAmount : ${orderView.orderDealOptionAmount}

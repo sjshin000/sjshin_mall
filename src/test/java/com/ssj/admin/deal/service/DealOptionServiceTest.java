@@ -17,7 +17,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.ssj.admin.deal.model.DealOption;
-import com.ssj.springstudy.sample.model.Sample;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:/spring/mvc-config.xml", "classpath:/spring/application*" })

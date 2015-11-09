@@ -10,6 +10,8 @@ import com.ssj.www.deal.model.Deal;
 import com.ssj.www.deal.repository.WwwDealOptionRepository;
 import com.ssj.www.deal.repository.WwwDealRepository;
 import com.ssj.www.order.model.OrderView;
+import com.ssj.www.order.model.OrderViewList;
+import com.ssj.www.order.repository.OrderViewRepository;
 
 @Service
 public class OrderViewService {
@@ -19,6 +21,8 @@ public class OrderViewService {
 	@Autowired
 	private WwwDealOptionRepository wwwDealOptionRepository;
 	
+	@Autowired
+	private OrderViewRepository orderViewRepository;
 	
 	public OrderView orderWiewAmountSet(OrderView orderWiew) {
 		System.out.println("======orderWiew.getOrderCount(): " + orderWiew.getOrderCount());
@@ -42,8 +46,8 @@ public class OrderViewService {
 		Deal deal = wwwDealRepository.dealSelect(mainDealSrl);
 		List<DealOption> dealOptionList = wwwDealOptionRepository.dealOptionSelect(mainDealSrl);
 		deal.setDealOptions(dealOptionList);
-		System.out.println("=======================wwwDealSelect : " + deal.getDealOptions());
-		System.out.println("=======================getDealOptions size: " + deal.getDealOptions().size());
+		System.out.println("=======================OrderViewService wwwDealSelect : " + deal.getDealOptions());
+		System.out.println("=======================OrderViewService getDealOptions size: " + deal.getDealOptions().size());
 		
 		return deal;
 	}
@@ -55,10 +59,13 @@ public class OrderViewService {
 		System.out.println("========서비스 dealOptionList size ======" + dealOptionList.size() + "============================");
 		return dealOptionList;
 	}
+
+	
+
+	public List<OrderView> orderViewSelectList(OrderViewList orderViewList) {
+		List<OrderView> orderViews = orderViewRepository.orderViewSelectList(orderViewList);
+		System.out.println("========서비스 dealOptionList size ======" + orderViews.size() + "============================");
+		return orderViews;
+	}
+
 }
-/*
- * 	private int orderCount;
-	private int orderDealAmount;
-	private int orderDealOptionAmount;
-	private int orderAmount;
- */

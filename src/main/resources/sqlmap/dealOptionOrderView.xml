@@ -5,7 +5,6 @@
     
 <mapper namespace="dealOptionOrderView">            
     <select id="selectList" parameterType= "String" resultType="com.ssj.www.order.model.OrderView">
-    <![CDATA[     
 		SELECT
 			d.title,
 			d.main_deal_srl,
@@ -22,8 +21,9 @@
 		FROM
 			 deal AS d LEFT JOIN deal_option AS o ON d.main_deal_srl = o.main_deal_srl
         WHERE 
-		    o.deal_option_srl IN (#{mainDealSrl})
-	]]>		
-	
+		    o.deal_option_srl IN 
+		    <foreach collection="orderViewList" item="orderView" separator="," open="(" close=")">
+		    	#{orderView.dealOptionSrl}
+		    </foreach>
     </select>
 </mapper>

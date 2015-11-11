@@ -64,8 +64,19 @@ public class OrderViewService {
 
 	public List<OrderView> orderViewSelectList(OrderViewList orderViews) {
 		System.out.println("========orderView서비스 접근");
+		System.out.println(orderViews.toString());
+		for(OrderView order : orderViews.getOrderViewList()) {
+			System.out.println("===order.getOrderCount()===" + order.getOrderCount());
+		}
+		
 		List<OrderView> orderViewList = orderViewRepository.orderViewSelectList(orderViews);
 		System.out.println("========orderView서비스 dealOptionList size ======" + orderViewList + "============================");
+		System.out.println(orderViewList.toString());
+		
+		for(OrderView orderView : orderViewList) {
+			System.out.println("===orderView.getOrderCount()===" + orderView.getOrderCount());
+		}
+		
 		return orderViewList;
 	}
 

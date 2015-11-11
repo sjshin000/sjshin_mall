@@ -16,23 +16,17 @@ public class OrderViewRepository {
 	
 	public List<OrderView> orderViewSelectList(OrderViewList orderViewList) {
 		System.out.println("========OrderViewRepository 접근===");
-		String dealOptionSrls = "";
-		String temp = ",";
-		int cnt = 0;
-		for(OrderView orderView : orderViewList.getOrderViewList()) {
-			int dealOptionSrl = orderView.getDealOptionSrl();
-			System.out.println("dealOptionSrl===" + dealOptionSrl);
-			cnt++;
-			if (cnt == orderViewList.getOrderViewList().size()) {
-				dealOptionSrls += dealOptionSrl;
-			} else {
-				dealOptionSrls += dealOptionSrl+temp;
+
+		List<OrderView> result = sqlSession.selectList("dealOptionOrderView.selectList", orderViewList);
+		for (OrderView item : result) {
+			for (OrderView inputItem : orderViewList.getOrderViewList()) {
+				if (item.getDealOptionSrl() == inputItem.getDealOptionSrl()) {
+					item.setOrderCount(inputItem.getOrderCount());
+					break;
+				}
 			}
 		}
-		System.out.println("dealOptionSrls===" +dealOptionSrls);
-		
-		List<OrderView> OrderViewList = sqlSession.selectList("dealOptionOrderView.selectList", dealOptionSrls);
-		return OrderViewList;
+		return result;
 	}
 
 }

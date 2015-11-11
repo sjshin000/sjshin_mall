@@ -35,6 +35,15 @@ public class OrderView {
 	public void setOrderCount(int orderCount) {
 		this.orderCount = orderCount;
 	}
+	@Override
+	public String toString() {
+		return "OrderView [mainDealSrl=" + mainDealSrl + ", dealOptionSrl="
+				+ dealOptionSrl + ", orderCount=" + orderCount
+				+ ", orderDealAmountTot=" + orderDealAmountTot
+				+ ", orderDealOptionAmount=" + orderDealOptionAmount
+				+ ", orderDealOptionAmountTot=" + orderDealOptionAmountTot
+				+ ", orderAmountTot=" + orderAmountTot + "]";
+	}
 	
 	
 }

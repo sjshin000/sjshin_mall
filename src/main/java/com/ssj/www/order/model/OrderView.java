@@ -1,5 +1,8 @@
 package com.ssj.www.order.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class OrderView {
 	private int mainDealSrl;
 	private int dealOptionSrl;
@@ -23,8 +26,7 @@ public class OrderView {
 	private int orderDealOptionAmount; //옵션 금액의 SUM
 	private int orderAmountTot;  //총 주문금액 (결제예상금액)
 	
-	
-	
+
 	public String getTitle() {
 		return title;
 	}

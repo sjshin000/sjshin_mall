@@ -62,22 +62,55 @@ public class OrderViewService {
 
 	
 
-	public List<OrderView> orderViewSelectList(OrderViewList orderViews) {
+	public List<OrderView> orderViewSelectList(OrderViewList inputOrderViewList) {
 		System.out.println("========orderView서비스 접근");
-		System.out.println(orderViews.toString());
-		for(OrderView order : orderViews.getOrderViewList()) {
-			System.out.println("===order.getOrderCount()===" + order.getOrderCount());
+		System.out.println(inputOrderViewList.toString());
+		
+		List<OrderView> resultOrderViewList = orderViewRepository.orderViewSelectList(inputOrderViewList);
+		System.out.println(resultOrderViewList.toString());
+		
+//		int dealAmount = 0;
+//		for(OrderView resultOrderView : resultOrderViewList) {
+//			System.out.println("===orderView.getOrderCount()==="+resultOrderView.getDealOptionSrl()+" : "+resultOrderView.getOrderCount());
+//
+//			resultOrderView.setOrderDealOptionAmount(resultOrderView.getOrderCount() * resultOrderView.getAmount());
+//			
+//			for(OrderView result : resultOrderViewList) {
+//				if(resultOrderView.getMainDealSrl() == result.getMainDealSrl()) {
+//					dealAmount += result.getOrderDealOptionAmount();
+//					resultOrderView.setOrderDealAmountTot(dealAmount);
+//				}
+//				System.out.println("===OrderDealAmountTot1 : "+result.getMainDealSrl()+" : "+resultOrderView.getOrderDealAmountTot());
+//			}
+//			System.out.println("===OrderDealAmountTot2 : "+resultOrderView.getMainDealSrl()+" : "+resultOrderView.getOrderDealAmountTot());
+//		}
+//		
+//		System.out.println(resultOrderViewList.toString());
+		
+		int index = 0;
+		for (index = 0; resultOrderViewList.size() > index; index++) {
+			OrderView orderView = resultOrderViewList.get(index);
+			orderView.setOrderDealOptionAmount(orderView.getOrderCount() * orderView.getAmount());
+			System.out.println("===getOrderDealOptionAmount(): "+orderView.getOrderDealOptionAmount());
+			
+			
+			
+			
+			if( 0 == index) {
+				orderView.setOrderDealAmountTot(orderView.getOrderDealOptionAmount());
+			} else {
+				OrderView orderViewTemp = resultOrderViewList.get(index-1);
+				int dealAmt = orderView.getOrderDealAmountTot();
+				
+				if(orderView.getMainDealSrl() == orderViewTemp.getMainDealSrl()) {
+					dealAmt += orderView.getOrderDealOptionAmount();
+					orderView.setOrderDealAmountTot(dealAmt);
+				}
+			}
+			System.out.println("==dealAmt:"+orderView.getOrderDealAmountTot());
 		}
 		
-		List<OrderView> orderViewList = orderViewRepository.orderViewSelectList(orderViews);
-		System.out.println("========orderView서비스 dealOptionList size ======" + orderViewList + "============================");
-		System.out.println(orderViewList.toString());
-		
-		for(OrderView orderView : orderViewList) {
-			System.out.println("===orderView.getOrderCount()===" + orderView.getOrderCount());
-		}
-		
-		return orderViewList;
+		return resultOrderViewList;
 	}
 
 }

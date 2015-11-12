@@ -17,7 +17,11 @@
 			d.`category3`,
 			d.`category4`,
 			o.`status`,
-			o.deal_option_srl
+			o.deal_option_srl,
+			o.amount,
+			o.depth1,
+			o.depth2,
+			o.depth3
 		FROM
 			 deal AS d LEFT JOIN deal_option AS o ON d.main_deal_srl = o.main_deal_srl
         WHERE 
@@ -25,5 +29,6 @@
 		    <foreach collection="orderViewList" item="orderView" separator="," open="(" close=")">
 		    	#{orderView.dealOptionSrl}
 		    </foreach>
+		    ORDER BY main_deal_srl DESC
     </select>
 </mapper>

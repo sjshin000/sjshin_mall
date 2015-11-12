@@ -14,19 +14,20 @@ public class OrderViewRepository {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	public List<OrderView> orderViewSelectList(OrderViewList orderViewList) {
+	public List<OrderView> orderViewSelectList(OrderViewList inputOrderViewList) {
 		System.out.println("========OrderViewRepository 접근===");
 
-		List<OrderView> result = sqlSession.selectList("dealOptionOrderView.selectList", orderViewList);
-		for (OrderView item : result) {
-			for (OrderView inputItem : orderViewList.getOrderViewList()) {
-				if (item.getDealOptionSrl() == inputItem.getDealOptionSrl()) {
-					item.setOrderCount(inputItem.getOrderCount());
+		List<OrderView> resultOrderViewList = sqlSession.selectList("dealOptionOrderView.selectList", inputOrderViewList);
+		for (OrderView resultOrderView : resultOrderViewList) {
+			for (OrderView inputOrderView : inputOrderViewList.getOrderViewList()) {
+				if (resultOrderView.getDealOptionSrl() == inputOrderView.getDealOptionSrl()) {
+					
+					resultOrderView.setOrderCount(inputOrderView.getOrderCount());
+					
 					break;
 				}
 			}
 		}
-		return result;
+		return resultOrderViewList;
 	}
-
 }

@@ -35,30 +35,26 @@ order 페이지
 		<th scope="col" class="delivery">딜 배송비</th>
 	</tr>
 	
-	<c:forEach items = "${dealOptionList}" var = "dealOption" varStatus="status" >
 	<c:forEach items = "${orderViewList}" var = "orderView" varStatus="status" >
 		<tr class = "">
-			<c:if test = "${orderView.mainDealSrl == deal.mainDealSrl}">
-				<td>${deal.mainDealSrl}</td>
-				<td>상품이미지</td>
-				<td><a href="" target="_blank" title="deal title" tl:area="CCCO" tl:ord="1" tl:linktype="txt">상품 이름 : ${deal.title}</a>
+			<td>${orderView.mainDealSrl}</td>
+			<td>상품이미지</td>
+			<td><a href="" target="_blank" title="deal title" tl:area="CCCO" tl:ord="1" tl:linktype="txt">상품 이름 : ${orderView.title}</a>
+			
+			<ul name="option_area" class="uio_option_area">
+			
+				<span class="option">옵션 이름 : ${orderView.dealOptionSrl}</span>
+				옵션번호 : ${orderView.dealOptionSrl}
+				<span class="amounts"><em name="opt_amount">옵션가격 : ${orderView.amount}</em></span>
+				수량 : ${orderView.orderCount}
+				옵션가격 합 : ${orderView.orderDealOptionAmount}
 				
-				<ul name="option_area" class="uio_option_area">
-				<c:if test = "${deal.mainDealSrl == dealOption.mainDealSrl}">	
-					<span class="option">옵션 이름 : ${dealOption.dealOptionSrl}</span>
-					옵션번호 : ${dealOption.dealOptionSrl}
-					<span class="amounts"><em name="opt_amount">상품가격 : ${dealOption.amount}</em></span>
-					수량 : ${orderView.orderCount}
-					상품당 가격 10000 *${orderView.orderCount}
-					
-					<td>주문금액</td>
-					<td>딜 배송비 : ${deal.deliveryAmount}</td>
-				</c:if>
-				</ul>
-			</c:if>
+				<td>딜합계 : ${orderView.orderDealAmountTot}</td>
+				<td>딜 배송비 : ${orderView.deliveryAmount}</td>
+			
+			</ul>
 		</tr>
 		orderDealOptionAmount : ${orderView.orderDealOptionAmount}
-	</c:forEach>
 	</c:forEach>
 </table>
 		

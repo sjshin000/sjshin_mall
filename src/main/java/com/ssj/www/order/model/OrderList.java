@@ -1,6 +1,6 @@
 package com.ssj.www.order.model;
 
-import java.util.ArrayList;
+///import java.util.ArrayList;
 
 public class OrderList {
 //	ArrayList<Order> orderList;

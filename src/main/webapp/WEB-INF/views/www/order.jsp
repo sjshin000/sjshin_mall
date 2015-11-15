@@ -49,12 +49,16 @@ order 페이지
 				수량 : ${orderView.orderCount}
 				옵션가격 합 : ${orderView.orderDealOptionAmount}
 				
-				<td>딜합계 : ${orderView.orderDealAmountTot}</td>
+				<td>딜합계 : ${orderView.orderDealAmount}</td>
 				<td>딜 배송비 : ${orderView.deliveryAmount}</td>
 			
 			</ul>
 		</tr>
 		orderDealOptionAmount : ${orderView.orderDealOptionAmount}
+	</c:forEach>
+	
+	<c:forEach items = "${orderViewList}" var = "orderView" varStatus="status" >
+		딜합계 : ${orderView}
 	</c:forEach>
 </table>
 		

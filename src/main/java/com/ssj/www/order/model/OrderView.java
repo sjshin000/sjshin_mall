@@ -22,10 +22,11 @@ public class OrderView {
 	private String deapth3;
 	
 	private int orderCount;  //구매수량
-	private int orderDealAmountTot;  //딜의 주문금액 sum
+	private int orderDealAmount;  //딜의 주문금액 sum
 	private int orderDealOptionAmount; //옵션 금액의 SUM
 	private int orderAmountTot;  //총 주문금액 (결제예상금액)
 	
+	Map<Integer, Integer> dealAmountMap = new HashMap<Integer, Integer>();
 
 	public String getTitle() {
 		return title;
@@ -111,11 +112,11 @@ public class OrderView {
 	public void setDeapth3(String deapth3) {
 		this.deapth3 = deapth3;
 	}
-	public int getOrderDealAmountTot() {
-		return orderDealAmountTot;
+	public int getOrderDealAmount() {
+		return orderDealAmount;
 	}
-	public void setOrderDealAmountTot(int orderDealAmountTot) {
-		this.orderDealAmountTot = orderDealAmountTot;
+	public void setOrderDealAmount(int orderDealAmount) {
+		this.orderDealAmount = orderDealAmount;
 	}
 
 	public int getOrderAmountTot() {
@@ -159,7 +160,7 @@ public class OrderView {
 				+ category3 + ", category4=" + category4 + ", status=" + status
 				+ ", amount=" + amount + ", deapth1=" + deapth1 + ", deapth2="
 				+ deapth2 + ", deapth3=" + deapth3 + ", orderCount="
-				+ orderCount + ", orderDealAmountTot=" + orderDealAmountTot
+				+ orderCount + ", orderDealAmount=" + orderDealAmount
 				+ ", orderDealOptionAmount=" + orderDealOptionAmount
 				+ ", orderAmountTot=" + orderAmountTot + "]";
 	}

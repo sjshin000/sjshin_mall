@@ -9,8 +9,6 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssj.www.deal.model.DealOption;
-import com.ssj.www.deal.model.Deal;
 import com.ssj.www.deal.repository.WwwDealOptionRepository;
 import com.ssj.www.deal.repository.WwwDealRepository;
 import com.ssj.www.order.model.OrderView;
@@ -36,47 +34,36 @@ public class OrderViewService {
 		
 		List<OrderView> resultOrderViewList = orderViewRepository.orderViewSelectList(inputOrderViewList);
 		System.out.println(resultOrderViewList.toString());
-		Map<Integer, OrderView> dealAmountMap = new HashMap<Integer, OrderView>();
+		
+		Map<Integer, Integer> dealAmountMap = new HashMap<Integer, Integer>();
 		
 		for(OrderView resultOrderView : resultOrderViewList) {
 			System.out.println("===orderView.getOrderCount()==="+resultOrderView.getDealOptionSrl()+" : "+resultOrderView.getOrderCount());
 			resultOrderView.setOrderDealOptionAmount(resultOrderView.getOrderCount() * resultOrderView.getAmount());
 			
-			dealAmountMap.put(resultOrderView.getMainDealSrl(), resultOrderView);		
+			Set<Integer> mainDealSrls = dealAmountMap.keySet();
+			Iterator<Integer> it = mainDealSrls.iterator();
+			
+			if(null == it) {
+				System.out.println("======if it=="+it);
+				dealAmountMap.put(resultOrderView.getDealOptionSrl(), resultOrderView.getOrderDealOptionAmount());	
+			} else {
+				System.out.println("======else it=="+it);
+				while(it.hasNext()) {
+					int mainDealSrl = it.next();
+					int dealAmount = dealAmountMap.get(mainDealSrl);
+					System.out.println("======while mainDealSrl=="+mainDealSrl);
+					System.out.println("======while dealAmount=="+dealAmount);
+					if(mainDealSrl==resultOrderView.getMainDealSrl()) {		
+						dealAmount = dealAmount + resultOrderView.getOrderDealOptionAmount();
+						dealAmountMap.put(resultOrderView.getDealOptionSrl(), dealAmount);	
+					}
+					System.out.println("===dealAmount: "+dealAmountMap.get(dealAmount));
+				}
+			}
 		}
-		
-		Set<Integer> mainDealSrls = dealAmountMap.keySet();
-		Iterator<Integer> it = mainDealSrls.iterator();
-		
-		while(it.hasNext()) {
-			int mainDealSrl = it.next();
-			OrderView orderView = dealAmountMap.get(mainDealSrl);
-			System.out.println("===mainDealSrl:"+mainDealSrl);
-			System.out.println("===orderView:"+orderView);
-		}
-		
+
 		System.out.println(resultOrderViewList.toString());
-		
-//		int index = 0;
-//		for (index = 0; resultOrderViewList.size() > index; index++) {
-//			OrderView orderView = resultOrderViewList.get(index);
-//			orderView.setOrderDealOptionAmount(orderView.getOrderCount() * orderView.getAmount());
-//			System.out.println("===getOrderDealOptionAmount(): "+orderView.getOrderDealOptionAmount());
-//			
-//			if( 0 == index) {
-//				orderView.setOrderDealAmountTot(orderView.getOrderDealOptionAmount());
-//			} else {
-//				OrderView orderViewTemp = resultOrderViewList.get(index-1);
-//				int dealAmt = orderView.getOrderDealAmountTot();
-//				
-//				if(orderView.getMainDealSrl() == orderViewTemp.getMainDealSrl()) {
-//					dealAmt += orderView.getOrderDealOptionAmount();
-//					orderView.setOrderDealAmountTot(dealAmt);
-//				}
-//			}
-//			System.out.println("==dealAmt:"+orderView.getOrderDealAmountTot());
-//		}
-		
 		return resultOrderViewList;
 	}
 

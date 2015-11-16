@@ -58,9 +58,17 @@ order 페이지
 </table>	
 	   ====총주문금액 : ${orderViewList.totalAmount}
 	   
-   <form name = "order" action="/www/order" name="info">
-   		<input type="text" /></br>
+   <form name = "orderInsert" action="/www/orderInsert" name="info">
+   		신용카드: <input type="text" name="payAmount" value="" /></br>
+   		적립금: <input type="text" name="pointAmount" value="" /></br>
+   		totalDiscountAmount: <input type="text" name="totalDiscountAmount" value="" /></br>
+   		cpuponAmount: <input type="text" name="cpuponAmount" value="" /></br>
+   		deliveryAmount: <input type="text" name="deliveryAmount" value="" /></br>
+   		deliveryAddress: <input type="text" name="deliveryAddress" value="" /></br>
+   		deliveryMsg: <input type="text" name="deliveryMsg" value="" /></br>
    		<input type = 'hidden' name = 'totalAmount' value = '${orderViewList.totalAmount}' />
+   		<input type = 'hidden' name = 'memberSrl' value = '1234' />
+   		<input type = 'hidden' name = 'payAmount' value = 'payAmount' />
    		<input type ="submit"  value="구매하기">
    </form>
 

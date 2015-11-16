@@ -92,7 +92,7 @@ function fn_changeSelected(obj) {
 			<input name="a1" type="text">
 		</form>
  -->
- 	<form name = "order" action="/www/order" name="info">
+ 	<form name = "orderView" action="/www/order" name="info">
 	<div class = "optionInfo2">
 		<div class = "temp">
 		</div>

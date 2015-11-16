@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="order">            
+    <select id="selectOrderViewList" parameterType= "String" resultType="com.ssj.www.order.model.OrderView">
+		SELECT
+			d.title,
+			d.main_deal_srl,
+			d.`deal_status`,
+			d.`delivery_policy`,
+			d.`delivery_amount`,
+			d.`delivery_if_amount`,
+			d.`category1`,
+			d.`category2`,
+			d.`category3`,
+			d.`category4`,
+			o.`status`,
+			o.deal_option_srl,
+			o.amount,
+			o.depth1,
+			o.depth2,
+			o.depth3
+		FROM
+			 deal AS d LEFT JOIN deal_option AS o ON d.main_deal_srl = o.main_deal_srl
+        WHERE 
+		    o.deal_option_srl IN 
+		    <foreach collection="orderViewList" item="orderView" separator="," open="(" close=")">
+		    	#{orderView.dealOptionSrl}
+		    </foreach>
+		    ORDER BY main_deal_srl DESC
+    </select>
+    
+    <insert id="orderInsert" parameterType= "com.ssj.www.order.model.Order">
+		INSERT INTO `order` (
+			member_srl
+			,order_status
+        	,action_status
+        	,total_amount
+        	,pay_amount
+        	,point_amount
+        	,total_discount_amount
+        	,cpupon_amount
+        	,delivery_amount
+        	,delivery_srl
+        	,delivery_status
+        	,delivery_address
+        	,delivery_msg
+        	,created_at
+        	,completed_at 
+        	,who_update    	
+		) VALUES (
+			#{memberSrl}
+			,#{orderStatus}
+			,#{actionStatus}
+			,#{totalAmount}
+			,#{payAmount}
+			,#{pointAmount}
+			,#{totalDiscountAmount}
+			,#{cpuponAmount}
+			,#{deliveryAmount}
+			,#{deliverySrl}
+			,#{deliveryStatus}
+			,#{deliveryAddress}
+			,#{deliveryMsg}
+			,#{createdAt}
+			,#{completedAt}
+			,#{whoUpdate}
+		)
+    </insert>
+</mapper>

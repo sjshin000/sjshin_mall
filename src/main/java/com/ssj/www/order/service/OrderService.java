@@ -13,12 +13,14 @@ import org.springframework.stereotype.Service;
 
 import com.ssj.www.deal.repository.WwwDealOptionRepository;
 import com.ssj.www.deal.repository.WwwDealRepository;
+import com.ssj.www.order.model.Order;
+import com.ssj.www.order.model.OrderList;
 import com.ssj.www.order.model.OrderView;
 import com.ssj.www.order.model.OrderViewList;
-import com.ssj.www.order.repository.OrderViewRepository;
+import com.ssj.www.order.repository.OrderRepository;
 
 @Service
-public class OrderViewService {
+public class OrderService {
 	@Autowired
 	private WwwDealRepository wwwDealRepository;
 	
@@ -26,7 +28,7 @@ public class OrderViewService {
 	private WwwDealOptionRepository wwwDealOptionRepository;
 	
 	@Autowired
-	private OrderViewRepository orderViewRepository;
+	private OrderRepository orderRepository;
 	
 
 
@@ -34,7 +36,7 @@ public class OrderViewService {
 		System.out.println("========orderView서비스 접근");
 		System.out.println(inputOrderViewList.toString());
 		
-		List<OrderView> resultOrderViewList = orderViewRepository.orderViewSelectList(inputOrderViewList);
+		List<OrderView> resultOrderViewList = orderRepository.orderViewSelectList(inputOrderViewList);
 		System.out.println(resultOrderViewList.toString());
 		
 		Map<Integer, Integer> dealAmountMap = new HashMap<Integer, Integer>();
@@ -69,6 +71,13 @@ public class OrderViewService {
 		result.setTotalAmount(totalAmount);
 		System.out.println(resultOrderViewList.toString());
 		return result;
+	}
+
+
+
+	public Order orderInsert(Order inputOrder) {
+		Order resultOrder = orderRepository.orderInsert(inputOrder);
+		return resultOrder;
 	}
 
 }

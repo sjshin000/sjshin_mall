@@ -12,7 +12,7 @@ public class Order {
 	private int totalAmount;  //총 구매금액
 	private int payAmount; //결제수단 금액
 	private int pointAmount;
-	private int totalDistcountAmount;
+	private int totalDiscountAmount;
 	private int cpuponAmount;
 	
 	private int deliveryAmount;
@@ -90,13 +90,15 @@ public class Order {
 	public void setPointAmount(int pointAmount) {
 		this.pointAmount = pointAmount;
 	}
+	
+	
 
-	public int getTotalDistcountAmount() {
-		return totalDistcountAmount;
+	public int getTotalDiscountAmount() {
+		return totalDiscountAmount;
 	}
 
-	public void setTotalDistcountAmount(int totalDistcountAmount) {
-		this.totalDistcountAmount = totalDistcountAmount;
+	public void setTotalDiscountAmount(int totalDiscountAmount) {
+		this.totalDiscountAmount = totalDiscountAmount;
 	}
 
 	public int getCpuponAmount() {

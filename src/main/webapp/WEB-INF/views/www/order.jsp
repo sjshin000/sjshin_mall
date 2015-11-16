@@ -31,36 +31,39 @@ order 페이지
 		<th scope="col" class="deal_info">상품 이미지</th>
 		<th scope="col" class="deal_info">상품 정보</th>
 		
-		<th scope="col" class="amounts">상품당 가격</th>
+		<th scope="col" class="amounts">딜 합계</th>
 		<th scope="col" class="delivery">딜 배송비</th>
 	</tr>
 	
-	<c:forEach items = "${orderViewList}" var = "orderView" varStatus="status" >
+	<c:forEach items = "${orderViewList.getOrderViewList()}" var = "orderView" varStatus="status" >
 		<tr class = "">
 			<td>${orderView.mainDealSrl}</td>
 			<td>상품이미지</td>
 			<td><a href="" target="_blank" title="deal title" tl:area="CCCO" tl:ord="1" tl:linktype="txt">상품 이름 : ${orderView.title}</a>
 			
 			<ul name="option_area" class="uio_option_area">
-			
 				<span class="option">옵션 이름 : ${orderView.dealOptionSrl}</span>
 				옵션번호 : ${orderView.dealOptionSrl}
 				<span class="amounts"><em name="opt_amount">옵션가격 : ${orderView.amount}</em></span>
 				수량 : ${orderView.orderCount}
 				옵션가격 합 : ${orderView.orderDealOptionAmount}
 				
-				<td>딜합계 : ${orderView.orderDealAmount}</td>
+				<td>딜합계 : ${orderViewList.getDealAmountMap().get(orderView.mainDealSrl)}</td>
 				<td>딜 배송비 : ${orderView.deliveryAmount}</td>
 			
 			</ul>
 		</tr>
-		orderDealOptionAmount : ${orderView.orderDealOptionAmount}
+			---${orderViewList.getDealAmountMap().get(orderView.mainDealSrl)}---
 	</c:forEach>
-	
-	<c:forEach items = "${orderViewList}" var = "orderView" varStatus="status" >
-		딜합계 : ${orderView}
-	</c:forEach>
-</table>
+</table>	
+	   ====총주문금액 : ${orderViewList.totalAmount}
+	   
+   <form name = "order" action="/www/order" name="info">
+   		<input type="text" /></br>
+   		<input type = 'hidden' name = 'totalAmount' value = '${orderViewList.totalAmount}' />
+   		<input type ="submit"  value="구매하기">
+   </form>
+
 		
 <br />
 <br />

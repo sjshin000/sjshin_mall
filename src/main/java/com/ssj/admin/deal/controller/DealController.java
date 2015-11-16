@@ -97,22 +97,4 @@ public class DealController {
 		dealService.dealUpdate(deal);
 		return mov;
 	}
-
-
-//	
-//	/**
-//	 * 삭제
-//	 */
-//	@RequestMapping("/boardDeleteForm")
-//	public ModelAndView boardDeleteForm() {
-//		ModelAndView mov = new ModelAndView("/board/boardList");
-//		return mov;
-//	}
-//	
-//	@RequestMapping("/boardDelete")
-//	public ModelAndView boardDelete(@RequestParam(value="boardId" , required = false) int boardId) {
-//		ModelAndView mov = new ModelAndView("redirect:/board/boardList");
-//		boardService.boardDelete(boardId);
-//		return mov;
-//	}
 }

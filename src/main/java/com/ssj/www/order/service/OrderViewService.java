@@ -1,5 +1,7 @@
 package com.ssj.www.order.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -28,7 +30,7 @@ public class OrderViewService {
 	
 
 
-	public List<OrderView> orderViewSelectList(OrderViewList inputOrderViewList) {
+	public OrderViewList orderViewSelectList(OrderViewList inputOrderViewList) {
 		System.out.println("========orderView서비스 접근");
 		System.out.println(inputOrderViewList.toString());
 		
@@ -37,34 +39,36 @@ public class OrderViewService {
 		
 		Map<Integer, Integer> dealAmountMap = new HashMap<Integer, Integer>();
 		
+		//옵션의 Amount , 딜의 Amount 구하기
 		for(OrderView resultOrderView : resultOrderViewList) {
 			System.out.println("===orderView.getOrderCount()==="+resultOrderView.getDealOptionSrl()+" : "+resultOrderView.getOrderCount());
 			resultOrderView.setOrderDealOptionAmount(resultOrderView.getOrderCount() * resultOrderView.getAmount());
 			
-			Set<Integer> mainDealSrls = dealAmountMap.keySet();
-			Iterator<Integer> it = mainDealSrls.iterator();
+			Integer mainDealSrls = dealAmountMap.get(resultOrderView.getMainDealSrl());
 			
-			if(null == it) {
-				System.out.println("======if it=="+it);
-				dealAmountMap.put(resultOrderView.getDealOptionSrl(), resultOrderView.getOrderDealOptionAmount());	
-			} else {
-				System.out.println("======else it=="+it);
-				while(it.hasNext()) {
-					int mainDealSrl = it.next();
-					int dealAmount = dealAmountMap.get(mainDealSrl);
-					System.out.println("======while mainDealSrl=="+mainDealSrl);
-					System.out.println("======while dealAmount=="+dealAmount);
-					if(mainDealSrl==resultOrderView.getMainDealSrl()) {		
-						dealAmount = dealAmount + resultOrderView.getOrderDealOptionAmount();
-						dealAmountMap.put(resultOrderView.getDealOptionSrl(), dealAmount);	
-					}
-					System.out.println("===dealAmount: "+dealAmountMap.get(dealAmount));
-				}
+			if(mainDealSrls == null) {
+				dealAmountMap.put(resultOrderView.getMainDealSrl(), resultOrderView.getOrderDealOptionAmount());
+			}else {
+				dealAmountMap.put(resultOrderView.getMainDealSrl(), mainDealSrls + resultOrderView.getOrderDealOptionAmount());
 			}
 		}
 
+		//Total Amout 카트구현 시 hash map에서 꺼내는거 다시 구현해야함.
+		Set<Integer> mainDealSrls = dealAmountMap.keySet();
+		Iterator<Integer> iterator = mainDealSrls.iterator();
+		int totalAmount =0;
+		while(iterator.hasNext()) {
+			int mainDealSrl = iterator.next();
+			int dealAmount = dealAmountMap.get(mainDealSrl);
+			totalAmount += dealAmount;
+		}
+		
+		OrderViewList result = new OrderViewList();
+		result.setOrderViewList((ArrayList<OrderView>)resultOrderViewList);
+		result.setDealAmountMap(dealAmountMap);
+		result.setTotalAmount(totalAmount);
 		System.out.println(resultOrderViewList.toString());
-		return resultOrderViewList;
+		return result;
 	}
 
 }

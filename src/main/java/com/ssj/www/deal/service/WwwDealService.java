@@ -20,7 +20,6 @@ public class WwwDealService {
 	private WwwDealOptionRepository wwwDealOptionRepository;
 	
 	public Deal dealSelect(int mainDealSrl) {
-//		Deal deal = wwwDealRepository.dealSelect(mainDealSrl);
 		Deal deal = wwwDealRepository.dealSelect(mainDealSrl);
 		List<DealOption> dealOptionList = wwwDealOptionRepository.dealOptionSelect(mainDealSrl);
 		deal.setDealOptions(dealOptionList);

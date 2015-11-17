@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+//-----------------환경설정 mock mvc test
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:/spring/mvc-config.xml", "classpath:/spring/application*" })
 @WebAppConfiguration
@@ -32,7 +33,6 @@ public class OrderViewControllerTest {
 	
 	@Autowired 
 	private MockHttpServletRequest request;
-
 	
 	private MockMvc mockMvc;
 	
@@ -40,6 +40,7 @@ public class OrderViewControllerTest {
 	public void setup() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 	}
+//-----------------환경설정 mock mvc test 기본셋팅
 	
 
 	@Test
@@ -49,17 +50,16 @@ public class OrderViewControllerTest {
 				.param("orderViewList[0].orderCount", "2")
 				.param("orderViewList[0].mainDealSrl", "1")
 				.param("orderViewList[0].dealOptionSrl", "3")
-				.param("orderViewList[0].orderCount", "3")
-				.param("orderViewList[0].mainDealSrl", "1")
-				.param("orderViewList[0].dealOptionSrl", "2")
-				.param("orderViewList[0].orderCount", "4")
-				.param("orderViewList[0].mainDealSrl", "1")
-				.param("orderViewList[0].dealOptionSrl", "1")
+				.param("orderViewList[1].orderCount", "3")
+				.param("orderViewList[1].mainDealSrl", "1")
+				.param("orderViewList[1].dealOptionSrl", "2")
+				.param("orderViewList[2].orderCount", "4")
+				.param("orderViewList[2].mainDealSrl", "1")
+				.param("orderViewList[2].dealOptionSrl", "1")
 				.accept(MediaType.TEXT_HTML))
 				.andExpect(status().isOk())	
 				.andExpect(handler().handlerType(OrderController.class))
-				.andExpect(handler().methodName("order"))
+				.andExpect(handler().methodName("orderView"))
 				.andDo(MockMvcResultHandlers.print());	
-				
 	}
 }

@@ -34,10 +34,10 @@ public class OrderService {
 
 	public OrderViewList orderViewSelectList(OrderViewList inputOrderViewList) {
 		System.out.println("========orderView서비스 접근");
-		System.out.println(inputOrderViewList.toString());
+		System.out.println("오더뷰파람:"+inputOrderViewList.toString());
 		
 		List<OrderView> resultOrderViewList = orderRepository.orderViewSelectList(inputOrderViewList);
-		System.out.println(resultOrderViewList.toString());
+		System.out.println("오더뷰select결과:"+resultOrderViewList.toString());
 		
 		Map<Integer, Integer> dealAmountMap = new HashMap<Integer, Integer>();
 		

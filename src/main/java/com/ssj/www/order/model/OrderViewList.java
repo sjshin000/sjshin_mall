@@ -6,11 +6,9 @@ import java.util.Map;
 
 public class OrderViewList {
 	Map<Integer, Integer> dealAmountMap = new HashMap<Integer, Integer>();
+	ArrayList<OrderView> orderViewList = new ArrayList<OrderView>();
 	int totalAmount;
-	ArrayList<OrderView> orderViewList;
-
-
-
+	
 	public int getTotalAmount() {
 		return totalAmount;
 	}

@@ -13,10 +13,14 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpSession;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -25,36 +29,40 @@ import org.springframework.web.context.WebApplicationContext;
 import com.ssj.admin.deal.model.DealOption;
 import com.ssj.admin.deal.service.DealService;
 
+//-----------------환경설정 mock mvc test
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration({ "classpath:/spring/mvc-config.xml", "classpath:/spring/application*" })
+@WebAppConfiguration
+
 public class DealOptionControllerTest {
+
 	@Autowired
 	private WebApplicationContext wac;
+	
+	@Autowired
 	private MockHttpSession session;
+	
+	@Autowired 
 	private MockHttpServletRequest request;
 	
 	private MockMvc mockMvc;
-
+	
 	@Before
 	public void setup() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 	}
+//-----------------환경설정 mock mvc test 기본셋팅
 	
 	@Test
 	public void testDealOptionModifyForm() throws Exception{
-		this.mockMvc.perform(post("admin/deal/dealOptionModify")
+		this.mockMvc.perform(post("/admin/deal/dealOptionModify")
 				.param("mainDealSrl", "1")
 				.accept(MediaType.TEXT_HTML))
+				
 				.andExpect(status().isOk())				
 				.andExpect(handler().handlerType(DealOptionController.class))
 				.andExpect(handler().methodName("dealOptionModify"))				
-//				.andExpect(model().attribute("sample" , hasProperty("id" , is("2"))))
-//				.andExpect(model().attribute("sample" , hasProperty("title" , is("bbbbbbb"))))
-//				.andExpect(model().attribute("sample" , hasItem( //- 리스트 일경우 다시 재확인
-//						allOf(
-//							hasProperty("id" , is("2"))
-//							,hasProperty("title" , is("bbbbbbb"))
-//						)	
-//				)))
+
 				.andDo(MockMvcResultHandlers.print());		
-		
 	}
 }

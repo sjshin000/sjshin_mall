@@ -1,11 +1,6 @@
 package com.ssj.admin.deal.controller;
 
-import static org.junit.Assert.*;
-
-import java.util.Calendar;
 import java.util.Date;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -23,11 +18,6 @@ import com.ssj.admin.deal.model.Deal;
 import com.ssj.admin.deal.model.DealOption;
 import com.ssj.admin.deal.repository.DealOptionRepository;
 import com.ssj.admin.deal.repository.DealRepository;
-
-import org.springframework.util.DigestUtils;
-
-
-
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -82,25 +72,25 @@ public class DealRepositoryTest {
 		Assert.assertEquals(result, 1);
 	}
 	
-	@Test
-	public void testDealOptionInsert() throws Exception {
-		DealOption dealOption = new DealOption();
-		dealOption.setMainDealSrl(5);
-		dealOption.setWhoUpdate("sjshin");
-		dealOption.setStatus("WT");
-		dealOption.setAmount(10000);
-		dealOption.setMaxCount(10);
-		dealOption.setDepth1("depth1");
-		dealOption.setDepth2("depth2");
-		dealOption.setDepth3("depth3");
-		
-		dealOption.setCreateAt(new Date());
-		
-		System.out.println("=================dealOption.getMainDealSrl() "+dealOption.getMainDealSrl());
-		System.out.println("=================dealOption.getAmount() "+dealOption.getAmount());
-		
-		int result = dealOptionRepository.dealOptionInsert(dealOption);
-		System.out.println("=================result"+result);
-		Assert.assertEquals(result, 1);
-	}
+//	@Test
+//	public void testDealOptionInsert() throws Exception {
+//		DealOption dealOption = new DealOption();
+//		dealOption.setMainDealSrl(5);
+//		dealOption.setWhoUpdate("sjshin");
+//		dealOption.setStatus("WT");
+//		dealOption.setAmount(10000);
+//		dealOption.setMaxCount(10);
+//		dealOption.setDepth1("depth1");
+//		dealOption.setDepth2("depth2");
+//		dealOption.setDepth3("depth3");
+//		
+//		dealOption.setCreateAt(new Date());
+//		
+//		System.out.println("=================dealOption.getMainDealSrl() "+dealOption.getMainDealSrl());
+//		System.out.println("=================dealOption.getAmount() "+dealOption.getAmount());
+//		
+//		int result = dealOptionRepository.dealOptionInsert(dealOption);
+//		System.out.println("=================result"+result);
+//		Assert.assertEquals(result, 1);
+//	}
 }

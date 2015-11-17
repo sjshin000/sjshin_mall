@@ -17,15 +17,17 @@ public class OrderViewList {
 		this.totalAmount = totalAmount;
 	}
 
-	public ArrayList<OrderView> getOrderViewList() {
-		return orderViewList;
-	}
-
+	
 	public Map<Integer, Integer> getDealAmountMap() {
 		return dealAmountMap;
 	}
 	public void setDealAmountMap(Map<Integer, Integer> dealAmountMap) {
 		this.dealAmountMap = dealAmountMap;
+	}
+	
+	
+	public ArrayList<OrderView> getOrderViewList() {
+		return orderViewList;
 	}
 	
 	public void setOrderViewList(ArrayList<OrderView> resultOrderViewList) {

@@ -23,7 +23,8 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:/spring/mvc-config.xml", "classpath:/spring/application*" })
 @WebAppConfiguration
-public class OrderViewControllerTest {
+
+public class OrderControllerTest {
 
 	@Autowired
 	private WebApplicationContext wac;
@@ -56,7 +57,9 @@ public class OrderViewControllerTest {
 				.param("orderViewList[2].orderCount", "4")
 				.param("orderViewList[2].mainDealSrl", "1")
 				.param("orderViewList[2].dealOptionSrl", "1")
+				
 				.accept(MediaType.TEXT_HTML))
+				
 				.andExpect(status().isOk())	
 				.andExpect(handler().handlerType(OrderController.class))
 				.andExpect(handler().methodName("orderView"))

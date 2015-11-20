@@ -63,6 +63,7 @@ public class OrderService {
 				//조건부 무료배송 조건 추가
 			} else {
 				deliveryAmount.put(resultOrderView.getMainDealSrl(), resultOrderView.getDeliveryAmount());
+				System.out.println("==배송비: "+resultOrderView.getDeliveryAmount());
 			}
 			
 		}

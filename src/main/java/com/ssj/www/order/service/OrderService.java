@@ -42,33 +42,46 @@ public class OrderService {
 		Map<Integer, Integer> dealAmountMap = new HashMap<Integer, Integer>();
 		Map<Integer, Integer> deliveryAmount = new HashMap<Integer, Integer>();
 		
-		//옵션의 Amount , 딜의 Amount 구하기  //배송비 추가 필요!!
+		
+		//옵션의 Amount , 딜의 Amount 구하기  
 		for(OrderView resultOrderView : resultOrderViewList) {
 			System.out.println("===orderView.getOrderCount()==="+resultOrderView.getDealOptionSrl()+" : "+resultOrderView.getOrderCount());
-			
+			System.err.println("==배송비*: "+resultOrderView.getDeliveryPolicy()+resultOrderView.getDeliveryAmount());
 			//옵션 Amount
 			resultOrderView.setOrderDealOptionAmount(resultOrderView.getOrderCount() * resultOrderView.getAmount());
 			
 			//딜 Amount
-			Integer mainDealSrls = dealAmountMap.get(resultOrderView.getMainDealSrl());
+			Integer dealAmount = dealAmountMap.get(resultOrderView.getMainDealSrl());
 			
-			if(mainDealSrls == null) {
+			if(dealAmount == null) {
 				dealAmountMap.put(resultOrderView.getMainDealSrl(), resultOrderView.getOrderDealOptionAmount());
 			}else {
-				dealAmountMap.put(resultOrderView.getMainDealSrl(), mainDealSrls + resultOrderView.getOrderDealOptionAmount());
+				dealAmountMap.put(resultOrderView.getMainDealSrl(), dealAmount + resultOrderView.getOrderDealOptionAmount());
 			}
 			
-			//배송비
-			if("condition".equals(resultOrderView.getDeliveryIfAmount())) {
-				//조건부 무료배송 조건 추가
-			} else {
+			
+			//배송비 Per, Free, Condition 
+			if("Condition".equals(resultOrderView.getDeliveryPolicy())) {
+				//딜 amt의 금액이 => 딜의 if 배송비조건 일때, 0 set 아니면 배송비를 set 	
+				if(dealAmountMap.get(resultOrderView.getMainDealSrl()) >= resultOrderView.getDeliveryIfAmount()) {
+					deliveryAmount.put(resultOrderView.getMainDealSrl(), 0);
+				} else {
+					deliveryAmount.put(resultOrderView.getMainDealSrl(), resultOrderView.getDeliveryAmount());
+				}
+
+			} else if ("Per".equals(resultOrderView.getDeliveryPolicy())){
+				
 				deliveryAmount.put(resultOrderView.getMainDealSrl(), resultOrderView.getDeliveryAmount());
-				System.out.println("==배송비: "+resultOrderView.getDeliveryAmount());
+			
+			} else if ("Free".equals(resultOrderView.getDeliveryPolicy())) {
+				
+				deliveryAmount.put(resultOrderView.getMainDealSrl(), 0);
+			
 			}
 			
 		}
 
-		//Total Amount 
+		//Total Amount 총구매금액 구하기
 		Set<Integer> mainDealSrls = dealAmountMap.keySet();
 		Iterator<Integer> iterator = mainDealSrls.iterator();
 		int totalAmount =0;
@@ -78,12 +91,13 @@ public class OrderService {
 			totalAmount += dealAmount;
 		}
 		
-		//옵션의 Amount , 딜의 Amount, Total Amount Set
+		//옵션의 Amount , 딜의 Amount, Total Amount, 배송비 Set
 		OrderViewList result = new OrderViewList();
 		result.setOrderViewList((ArrayList<OrderView>)resultOrderViewList);
 		result.setDealAmountMap(dealAmountMap);
 		result.setTotalAmount(totalAmount);
-		System.out.println(resultOrderViewList.toString());
+		result.setDeliveryAmount(deliveryAmount);
+		System.err.println(resultOrderViewList.toString());
 		return result;
 	}
 

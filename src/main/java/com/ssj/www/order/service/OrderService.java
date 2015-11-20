@@ -40,12 +40,16 @@ public class OrderService {
 		System.out.println("오더뷰select결과:"+resultOrderViewList.toString());
 		
 		Map<Integer, Integer> dealAmountMap = new HashMap<Integer, Integer>();
+		Map<Integer, Integer> deliveryAmount = new HashMap<Integer, Integer>();
 		
-		//옵션의 Amount , 딜의 Amount 구하기
+		//옵션의 Amount , 딜의 Amount 구하기  //배송비 추가 필요!!
 		for(OrderView resultOrderView : resultOrderViewList) {
 			System.out.println("===orderView.getOrderCount()==="+resultOrderView.getDealOptionSrl()+" : "+resultOrderView.getOrderCount());
+			
+			//옵션 Amount
 			resultOrderView.setOrderDealOptionAmount(resultOrderView.getOrderCount() * resultOrderView.getAmount());
 			
+			//딜 Amount
 			Integer mainDealSrls = dealAmountMap.get(resultOrderView.getMainDealSrl());
 			
 			if(mainDealSrls == null) {
@@ -53,9 +57,17 @@ public class OrderService {
 			}else {
 				dealAmountMap.put(resultOrderView.getMainDealSrl(), mainDealSrls + resultOrderView.getOrderDealOptionAmount());
 			}
+			
+			//배송비
+			if("condition".equals(resultOrderView.getDeliveryIfAmount())) {
+				//조건부 무료배송 조건 추가
+			} else {
+				deliveryAmount.put(resultOrderView.getMainDealSrl(), resultOrderView.getDeliveryAmount());
+			}
+			
 		}
 
-		//Total Amout 카트구현 시 hash map에서 꺼내는거 다시 구현해야함.
+		//Total Amount 
 		Set<Integer> mainDealSrls = dealAmountMap.keySet();
 		Iterator<Integer> iterator = mainDealSrls.iterator();
 		int totalAmount =0;
@@ -65,6 +77,7 @@ public class OrderService {
 			totalAmount += dealAmount;
 		}
 		
+		//옵션의 Amount , 딜의 Amount, Total Amount Set
 		OrderViewList result = new OrderViewList();
 		result.setOrderViewList((ArrayList<OrderView>)resultOrderViewList);
 		result.setDealAmountMap(dealAmountMap);

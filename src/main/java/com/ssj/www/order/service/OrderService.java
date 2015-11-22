@@ -102,6 +102,10 @@ public class OrderService {
 	}
 
 
+	public Order orderCheck(Order inputOrder) {
+		//주문데이터 유효성 체크 후 orderInsert 호출로 변경해야 함.
+		return null;
+	}
 
 	public Order orderInsert(Order inputOrder) {
 		Order resultOrder = orderRepository.orderInsert(inputOrder);

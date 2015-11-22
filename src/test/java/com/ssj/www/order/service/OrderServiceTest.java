@@ -94,9 +94,10 @@ public class OrderServiceTest {
 		System.err.println("==서비스test결과출력 총 주문금액: "+orderViewListResult.getTotalAmount());
 		System.err.println("==서비스test결과출력 배송비: "+orderViewListResult.getDeliveryAmount());
 		/*
-			==서비스test결과출력 Otp갯수: 5
-			==서비스test결과출력 딜총: {1=63000, 2=23000}
-			==서비스test결과출력 총: 86000
+			==서비스test결과출력 Otp갯수: 7
+			==서비스test결과출력 딜 주문금액: {1=23000, 2=90000, 3=50000}
+			==서비스test결과출력 총 주문금액: 163000
+			==서비스test결과출력 배송비: {1=2500, 2=0, 3=0}
 		 */
 	}
 	

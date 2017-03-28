@@ -1,8 +1,13 @@
 package com.ssj.admin.deal.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.ssj.admin.deal.model.DealPage;
+import com.ssj.common.util.Paging;
+import com.ssj.common.util.PagingUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +47,32 @@ public class DealService {
 	}
 
 
-	public List<Deal> dealSelectList() {
-		List<Deal> dealList = dealRepository.dealSelectList();
-		return dealList;
+	public DealPage getDealSearch(int pageNo, String searchWord) {
+		int totalCount = dealRepository.getDealSearchTotalCount(searchWord);
+		int divideRecode = 10;
+
+		Map<String, Object> params = PagingUtils.getSelectPageNumbers(pageNo, divideRecode, searchWord);
+		List<Deal> deals = dealRepository.getDealsSearch(params);
+
+		return makeDealPageData(pageNo, totalCount, divideRecode, deals);
+	}
+
+	private DealPage makeDealPageData(int pageNo, int totalCount, int divideRecode, List<Deal> deals) {
+		int totalPageCount = totalCount / divideRecode;
+		if (totalCount % divideRecode != 0) {
+			totalPageCount = totalPageCount + 1;
+		}
+
+		DealPage dealPage = new DealPage();
+
+		Paging paging = new Paging();
+		paging.setCurrentPageNo(pageNo);
+		paging.setTotalCount(totalCount);
+		paging.setTotalPageCount(totalPageCount);
+
+		dealPage.setPaging(paging);
+		dealPage.setDealList(deals);
+		return dealPage;
 	}
 
 

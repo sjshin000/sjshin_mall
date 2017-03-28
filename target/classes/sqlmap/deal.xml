@@ -107,5 +107,45 @@
         WHERE 
 		    main_deal_srl = #{mainDealSrl}
 	]]>		
-    </update>  
+    </update>
+
+    <select id="getDealTotalCount" resultType="int">
+        SELECT count(*)
+        FROM  deal
+    </select>
+
+	<select id="getDealSearchTotalCount" parameterType="map" resultType="int">
+		SELECT count(*)
+		FROM  deal
+		<if test="searchWord != null">
+			WHERE	title = #{searchWord}
+		</if>
+	</select>
+
+	<select id="getDealsSearch" parameterType="map" resultType="com.ssj.admin.deal.model.Deal">
+			SELECT
+				`main_deal_srl`
+				,`title`
+				,`start_date`
+				,`end_date`
+				,`created_at`
+				,`updated_at`
+				,`deal_status`
+				,`category1`
+				,`category2`
+				,`category3`
+				,`category4`
+				,`who_update`
+				,`delivery_policy`
+				,`delivery_amount`
+				,`delivery_if_amount`
+			FROM
+				deal
+			<if test="searchWord != null">
+			WHERE	title = #{searchWord}
+			</if>
+			ORDER BY main_deal_srl DESC
+			LIMIT #{startNo}, #{endNo}
+	</select>
+
 </mapper>

@@ -1,18 +1,21 @@
 package com.ssj.admin.deal.controller;
 
 import java.util.List;
-
+import com.ssj.admin.deal.model.DealPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ssj.admin.deal.model.Deal;
 import com.ssj.admin.deal.service.DealService;
+import com.google.gson.Gson;
+
 
 
 @Controller
@@ -30,12 +33,13 @@ public class DealController {
 	public ModelAndView dealWriteForm(){
 		ModelAndView mov = new ModelAndView("admin/deal/dealAdd");
 		System.out.println("===========================dealAdd 페이지 접근============================================");
+		logger.debug("dealAdd {}");
 		return mov;
 	}
 	
 	/**
 	 * admin deal Insert용 
-	 * @param mav
+	 * @param
 	 * @return
 	 */
 	@RequestMapping("/dealInsert")
@@ -48,30 +52,44 @@ public class DealController {
 		return mav;
 	}
 
-
 	/**
-	 * 리스트 가져오기(화면뷰)
-	 * @return
-	 */
+	 *
+	 * @param page
+	 * @param searchWord
+     * @return
+     */
 	@RequestMapping("/dealList")
-	//public ModelAndView boardList(@RequestParam(value = "page" , required = false) String page) {
-	public ModelAndView dealList() {
+	public ModelAndView dealList(@RequestParam(value = "page" , required = false) String page
+								, @RequestParam(value = "searchWord" , required = false) String searchWord) {
 		ModelAndView mov = new ModelAndView("admin/deal/dealList");
-		List<Deal> dealList = dealService.dealSelectList();
-//		int pageNum = 0;
-//		int totalCount = dealList.size();
-//		
-//		if (page == null) {
-//			pageNum = 1;
-//		} else if (page != null){
-//			pageNum = Integer.parseInt(page);
-//		}
-//		
-		mov.addObject("dealList", dealList);
-		return mov;
+		if (StringUtils.isEmpty(page)) {
+			page = "1";
+		}
+		System.out.println("===>>>page : " + page);
+		System.out.println("===>>>searchWord : " + searchWord);
+		logger.debug("dealList3 page {}, searchWord {}", page, searchWord);
+
+		DealPage dealPage = dealService.getDealSearch(Integer.parseInt(page), searchWord);
+
+		logger.debug("dealList3 page {}, dealPage {}", page, dealPage);
+
+		return mov.addObject("dealPage", dealPage);
 	}
 
-	
+	//json 으로 리턴
+//	@RequestMapping("/dealList3")
+//	public @ResponseBody Object dealList(@RequestParam(value = "page" , required = false) String page
+//			, @RequestParam(value = "page" , required = false) String searchWord) {
+//		if (StringUtils.isEmpty(page)) {
+//			page = "1";
+//		}
+//		DealPage dealPage = dealService.getDealSearch(Integer.parseInt(page), searchWord);
+//		logger.debug("page {}, dealPage {}", searchWord, dealPage);
+//
+//		Gson gson = new Gson();
+//
+//		return gson.toJson(dealPage);
+//	}
 	/**
 	 * 딜 수정 page 가져오기
 	 */
@@ -81,13 +99,13 @@ public class DealController {
 		System.out.println("===========================dealModify mainDealSrl" + mainDealSrl + "===========================================");
 
 		Deal deal = dealService.dealSelect(mainDealSrl);
-		System.out.println("========컨트롤러 deal======" + deal + "============================");
+		System.out.println("========컨트롤러 deal======" + deal + "=======  =====================");
 		mov.addObject("deal", deal);
 		return mov;
 	}
 	
 	
-	/**
+	/*
 	 * 딜 수정 - Update
 	 * @return
 	 */

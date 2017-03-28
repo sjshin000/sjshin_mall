@@ -1,12 +1,14 @@
 package com.ssj.admin.deal.model;
 
+import com.ssj.common.util.BaseModelSupport;
+
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Deal {
+public class Deal extends BaseModelSupport {
 	private int mainDealSrl; //main_deal_srl
 	private String title; //
 	private Date startDate; //start_date
@@ -135,4 +137,5 @@ public class Deal {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+
 }

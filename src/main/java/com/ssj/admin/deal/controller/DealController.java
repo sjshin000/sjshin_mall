@@ -1,6 +1,5 @@
 package com.ssj.admin.deal.controller;
 
-import java.util.List;
 import com.ssj.admin.deal.model.DealPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,12 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ssj.admin.deal.model.Deal;
 import com.ssj.admin.deal.service.DealService;
-import com.google.gson.Gson;
 
 
 

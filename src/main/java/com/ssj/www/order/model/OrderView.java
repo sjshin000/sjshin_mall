@@ -1,11 +1,14 @@
 package com.ssj.www.order.model;
 
-public class OrderView {
+import com.ssj.common.model.DeliveryPolicy;
+import com.ssj.common.util.BaseModelSupport;
+
+public class OrderView extends BaseModelSupport {
 	private int mainDealSrl;
 	private int dealOptionSrl;
 	private String title;
 	private String dealStatus;
-	private String deliveryPolicy;
+	private DeliveryPolicy deliveryPolicy;
 	private int deliveryAmount;
 	private int deliveryIfAmount;
 	private int category1;
@@ -22,7 +25,14 @@ public class OrderView {
 //	private int orderDealAmount;  //딜의 주문금액 sum - 안쓰는거 지울거
 	private int orderDealOptionAmount; //옵션 금액의 SUM
 //	private int orderAmountTot;  //총 주문금액 (결제예상금액)  - 안쓰는거 지울거
-	
+
+	public DeliveryPolicy getDeliveryPolicy() {
+		return deliveryPolicy;
+	}
+
+	public void setDeliveryPolicy(DeliveryPolicy deliveryPolicy) {
+		this.deliveryPolicy = deliveryPolicy;
+	}
 
 	public String getTitle() {
 		return title;
@@ -36,12 +46,7 @@ public class OrderView {
 	public void setDealStatus(String dealStatus) {
 		this.dealStatus = dealStatus;
 	}
-	public String getDeliveryPolicy() {
-		return deliveryPolicy;
-	}
-	public void setDeliveryPolicy(String deliveryPolicy) {
-		this.deliveryPolicy = deliveryPolicy;
-	}
+
 	public int getDeliveryAmount() {
 		return deliveryAmount;
 	}
@@ -132,19 +137,5 @@ public class OrderView {
 	public void setOrderCount(int orderCount) {
 		this.orderCount = orderCount;
 	}
-	@Override
-	public String toString() {
-		return "OrderView [mainDealSrl=" + mainDealSrl + ", dealOptionSrl="
-				+ dealOptionSrl + ", title=" + title + ", dealStatus="
-				+ dealStatus + ", deliveryPolicy=" + deliveryPolicy
-				+ ", delivery_amount=" + deliveryAmount
-				+ ", delivery_if_amount=" + deliveryIfAmount+ ", category1="
-				+ category1 + ", category2=" + category2 + ", category3="
-				+ category3 + ", category4=" + category4 + ", status=" + status
-				+ ", amount=" + amount + ", deapth1=" + deapth1 + ", deapth2="
-				+ deapth2 + ", deapth3=" + deapth3 + ", orderCount="
-				+ orderCount + "]";
-	}
-	
-	
+
 }

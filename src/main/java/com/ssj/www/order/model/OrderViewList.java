@@ -1,14 +1,16 @@
 package com.ssj.www.order.model;
 
+import com.ssj.common.util.BaseModelSupport;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OrderViewList {
-	Map<Integer, Integer> dealAmountMap = new HashMap<Integer, Integer>();
-	Map<Integer, Integer> deliveryAmount = new HashMap<Integer, Integer>();
+public class OrderViewList extends BaseModelSupport {
+	Map<Integer, Integer> dealAmountMap = new HashMap<>();
+	Map<Integer, Integer> deliveryAmount = new HashMap<>();
 	
-	ArrayList<OrderView> orderViewList = new ArrayList<OrderView>();
+	ArrayList<OrderView> orderViewList = new ArrayList<>();
 	
 	int totalAmount;
 	

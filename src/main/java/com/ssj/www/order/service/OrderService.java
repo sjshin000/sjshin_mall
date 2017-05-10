@@ -1,20 +1,22 @@
 package com.ssj.www.order.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.ssj.common.model.Delivery;
+import com.ssj.common.model.DeliveryPolicy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssj.www.deal.repository.WwwDealOptionRepository;
 import com.ssj.www.deal.repository.WwwDealRepository;
 import com.ssj.www.order.model.Order;
-import com.ssj.www.order.model.OrderList;
 import com.ssj.www.order.model.OrderView;
 import com.ssj.www.order.model.OrderViewList;
 import com.ssj.www.order.repository.OrderRepository;
@@ -29,8 +31,8 @@ public class OrderService {
 	
 	@Autowired
 	private OrderRepository orderRepository;
-	
 
+	private static final Logger logger = LoggerFactory.getLogger(OrderService.class);
 
 	public OrderViewList orderViewSelectList(OrderViewList inputOrderViewList) {
 		System.out.println("========orderView서비스 접근");
@@ -61,7 +63,7 @@ public class OrderService {
 			
 			
 			//배송비 Per, Free, Condition 
-			if("Condition".equals(resultOrderView.getDeliveryPolicy())) {
+			if(DeliveryPolicy.Condition == resultOrderView.getDeliveryPolicy()) {
 				//딜 amt의 금액이 => 딜의 if 배송비조건 일때, 0 set 아니면 배송비를 set 	
 				if(dealAmountMap.get(resultOrderView.getMainDealSrl()) >= resultOrderView.getDeliveryIfAmount()) {
 					deliveryAmount.put(resultOrderView.getMainDealSrl(), 0);
@@ -74,7 +76,6 @@ public class OrderService {
 				deliveryAmount.put(resultOrderView.getMainDealSrl(), resultOrderView.getDeliveryAmount());
 			
 			} else if ("Free".equals(resultOrderView.getDeliveryPolicy())) {
-				
 				deliveryAmount.put(resultOrderView.getMainDealSrl(), 0);
 			
 			}
